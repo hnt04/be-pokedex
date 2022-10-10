@@ -159,11 +159,12 @@ router.get("/:id", ((req,res,next) => {
 
         const { pokemons } = db;
 
-        if(id = 1) {
+        pokemons.forEach(p => {
+        if(id === 1) {
             currentPoke = pokemons[0]
             nextPoke = pokemons[1]
             prevPoke = pokemons[pokemons.length - 1]
-        } else if(id = pokemons.length - 1) {
+        } else if(id === pokemons.length - 1) {
             currentPoke = pokemons[pokemons.length - 1]
             nextPoke = pokemons[0]
             prevPoke = pokemons[pokemons.length - 2]
@@ -176,6 +177,7 @@ router.get("/:id", ((req,res,next) => {
                 exception.statusCode = 404;
                 throw exception;
         }
+    })
         res.send({currentPoke, nextPoke, prevPoke})
         }  catch (error) {
            next(error)

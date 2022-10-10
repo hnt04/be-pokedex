@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
-app.use('/api', indexRouter);
+app.use('/', indexRouter);
 
 app.use((req,res,next) => {
     const exception = new Error(`Path not found`);
