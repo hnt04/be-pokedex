@@ -10,7 +10,7 @@ router.get("/",(req,res,next)=>{
       try {
         let { page, limit, ...filterQuery } = req.query;
         page = parseInt(page) || 1
-        limit = parseInt(limit) || 10  
+        limit = parseInt(limit) || 20  
 
         const filterKeys = Object.keys(filterQuery);
         filterKeys.forEach((key) => {

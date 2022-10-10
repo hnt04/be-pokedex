@@ -12,9 +12,9 @@ const createPokemonData = async() => {
         let types = p.Type2 ? [p.Type1.toLowerCase(), p.Type2.toLowerCase()] : [p.Type1.toLowerCase()]
         return {
             name: p.Name,
-        id: index + 1,
-        types,
-        url: `http://localhost:5000/images/${index + 1}.jpg`,
+            id: index + 1,
+            types,
+            url: `http://localhost:5000/images/${index+1}.jpg`,
     }
 })
     data.pokemon = pokemonData;
