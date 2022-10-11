@@ -1,4 +1,3 @@
-const crypto=require('crypto')
 const fs = require("fs");
 var express = require('express');
 var router = express.Router();
@@ -150,9 +149,9 @@ router.get("/:id", ((req,res,next) => {
         let { id } = req.params;
         id = parseInt(id);
 
-        let currentPoke;
-        let nextPoke;
-        let prevPoke;
+        let pokemon;
+        let nextPokemon;
+        let previousPokemon;
 
         let db = fs.readFileSync("db.json", "utf-8");
         db = JSON.parse(db);
@@ -161,24 +160,24 @@ router.get("/:id", ((req,res,next) => {
 
         pokemons.forEach(p => {
         if(id === 1) {
-            currentPoke = pokemons[0]
-            nextPoke = pokemons[1]
-            prevPoke = pokemons[pokemons.length - 1]
+            pokemon = pokemons[0]
+            nextPokemon = pokemons[1]
+            previousPokemon = pokemons[pokemons.length - 1]
         } else if(id === pokemons.length - 1) {
-            currentPoke = pokemons[pokemons.length - 1]
-            nextPoke = pokemons[0]
-            prevPoke = pokemons[pokemons.length - 2]
+            pokemon = pokemons[pokemons.length - 1]
+            nextPokemon = pokemons[0]
+            previousPokemon = pokemons[pokemons.length - 2]
         } else if( 1 < id < pokemons.length - 1) {
-            currentPoke = pokemons[id - 1]
-            nextPoke = pokemons[id]
-            prevPoke = pokemons[id - 2]
+            pokemon = pokemons[id - 1]
+            nextPokemon = pokemons[id]
+            previousPokemon = pokemons[id - 2]
         } else {
             const exception = new Error(`Pokemon not found`);
                 exception.statusCode = 404;
                 throw exception;
         }
     })
-        res.send({currentPoke, nextPoke, prevPoke})
+        res.send({data:{pokemon, nextPokemon, previousPokemon}})
         }  catch (error) {
            next(error)
     }
